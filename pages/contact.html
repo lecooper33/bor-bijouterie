@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <title>Contact - B'OR</title>
+</head>
+<body>    <header>
+        <nav class="navbar">
+            <div class="brand">
+                <a href="../index.html" title="B'OR - Accueil">B'OR</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="boutique.html">Boutique</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+                <li><a href="faq-cgv.html">FAQ / CGV</a></li>
+                <li class="cart">
+                    <a href="panier.html" title="Voir mon panier">
+                        <iconify-icon icon="mdi:cart" width="24" height="24"></iconify-icon>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <div class="image-contact">
+             <div class="overlay-2"></div>
+  <div class="titre-contact">
+    <h1>Contacter-nous</h1>
+    <div class="sous-titre">
+        <p><a href="index.html">Accueil</a></p>
+    <p>Pour tout vos besoins sur mesure</p>
+    </div>
+    
+  </div>
+        </div>
+        
+    </main>
+    <section class="contact-form">
+        <div class="localisation">
+            <div class="texte">
+                <p>Nous sommes situés à Libreville, Gabon.</p>
+                <p>Notre équipe est à votre disposition pour répondre à toutes vos questions.</p>
+
+            </div>
+            <div class="numero">
+             <span><iconify-icon icon="mdi:phone" width="24" height="24"></iconify-icon></span>   <p>+241 0000000</p>
+            </div>
+            <div class="email">
+                <span><iconify-icon icon="mdi:email" width="24" height="24"></iconify-icon></span>
+                <p>contact@bior.com</p>
+            </div>
+            <div class="resaux">
+                <a href="https://www.facebook.com/Bior" target="_blank"><span><iconify-icon icon="mdi:facebook" width="24" height="24"></iconify-icon></span></a>
+                <a href="https://www.instagram.com/Bior" target="_blank"><span><iconify-icon icon="mdi:instagram" width="24" height="24"></iconify-icon></span></a>
+                <a href="https://www.twitter.com/Bior" target="_blank"><span><iconify-icon icon="mdi:twitter" width="24" height="24"></iconify-icon></span></a>
+                <a href="https://www.tiktok.com/@Bior" target="_blank"><span><iconify-icon icon="mdi:tiktok" width="24" height="24"></iconify-icon></span></a>
+            </div>
+        </div>
+        <div class="form-container">
+            <form action="#" method="POST" class="contact-form-content">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" required>
+                    <label for="name">Votre Nom</label>
+                    <span class="form-line"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Votres Email</label>
+                    <span class="form-line"></span>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="number" name="number" required>
+                    <label for="number">Votre numéro de téléphone</label>
+                    <span class="form-line"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="subject" name="subject">
+                    <label for="subject">Votre sujet</label>
+                    <span class="form-line"></span>
+                </div>
+
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="message">Votre Message</label>
+                    <span class="form-line"></span>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span>Envoyer le Message</span>
+                    <iconify-icon icon="material-symbols:send-outline"></iconify-icon>
+                </button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <!-- Le footer sera ajouté ici -->
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
