@@ -2,25 +2,33 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="B'OR - Connexion et inscription à votre compte">
+    <meta name="keywords" content="connexion, inscription, compte, B'OR">
+    <meta name="author" content="B'OR">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#D4AF37">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../css/produit.css">
-        <link rel="stylesheet" href="../css/footer.css">
-    <title>Détail du produit - B'OR</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <title>Connexion / Inscription - B'OR</title>
 </head>
-<body>    <header>
+<body>
+    <header>
         <nav class="navbar">
             <div class="brand">
                 <a href="../index.html" title="B'OR - Accueil">B'OR</a>
-            </div>            <ul class="nav-links">
+            </div>
+            <ul class="nav-links">
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="login.html">Connexion</a></li>
+                <li><a href="login.html" aria-current="page">Connexion</a></li>
                 <li><a href="boutique.html">Boutique</a></li>
                 <li><a href="a-propos.html">À propos</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="faq-cgv.html">FAQ / CGV</a></li>
                 <li class="cart">
-                    <a href="panier.html" title="Voir mon panier">  Panier
+                    <a href="panier.html" title="Voir mon panier"> Panier
                         <iconify-icon icon="mdi:cart" width="24" height="24"></iconify-icon>
                         <span class="cart-count">0</span>
                     </a>
@@ -34,28 +42,49 @@
         </nav>
     </header>
     <main>
-        <section class="product-detail">
-            <!-- Les détails du produit seront ajoutés ici -->
-        </section>
+        <div class="container" id="container">
+            <!-- Ajout des boutons de navigation mobile -->
+            <div class="mobile-nav">
+                <button type="button" class="mobile-sign-in active" id="mobileSignIn">Se connecter</button>
+                <button type="button" class="mobile-sign-up" id="mobileSignUp">S'inscrire</button>
+            </div>
+        <div class="form-container sign-up">
+            <form>
+                <h1>Créer un compte</h1>
+                <input type="text" placeholder="Nom" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <input type="password" placeholder="Confirmer le mot de passe" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Se connecter</h1>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <a href="#">Mot de passe oublié ?</a>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Déjà membre ?</h1>
+                    <p>Connectez-vous pour accéder à votre compte</p>
+                    <button class="ghost" id="signIn">Se connecter</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Nouveau client ?</h1>
+                    <p>Inscrivez-vous et rejoignez notre communauté</p>
+                    <button class="ghost" id="signUp">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>        </div>
     </main>
     <footer>
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>À propos de B'OR</h3>
-                <p>B'OR est votre destination de choix pour des bijoux élégants et raffinés. Nous proposons une collection unique de pièces artisanales de haute qualité.</p>
-                <div class="social-links">
-                    <a href="#" title="Suivez-nous sur Facebook" aria-label="Facebook">
-                        <iconify-icon icon="mdi:facebook" width="24" height="24"></iconify-icon>
-                    </a>
-                    <a href="#" title="Suivez-nous sur Instagram" aria-label="Instagram">
-                        <iconify-icon icon="mdi:instagram" width="24" height="24"></iconify-icon>
-                    </a>
-                    <a href="#" title="Suivez-nous sur Pinterest" aria-label="Pinterest">
-                        <iconify-icon icon="mdi:pinterest" width="24" height="24"></iconify-icon>
-                    </a>
-                </div>
-            </div>
-
             <div class="footer-section">
                 <h3>Liens rapides</h3>
                 <ul class="footer-links">
@@ -101,10 +130,6 @@
                 <h3>Newsletter</h3>
                 <p>Inscrivez-vous pour recevoir nos dernières offres et nouveautés.</p>
                 <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Votre email" aria-label="Adresse email pour la newsletter">
-                    <button type="submit" aria-label="S'inscrire à la newsletter">
-                        <iconify-icon icon="mdi:send"></iconify-icon>
-                    </button>
                 </form>
             </div>
         </div>
@@ -119,7 +144,7 @@
             <p>&copy; 2025 B'OR. Tous droits réservés.</p>
         </div>
     </footer>
+    <script src="../script/login.js"></script>
     <script src="../script.js"></script>
-    <script src="../script/produit.js"></script>
 </body>
 </html>

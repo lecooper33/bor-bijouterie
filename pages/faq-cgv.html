@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <link rel="stylesheet" href="../style.css">
-        <link rel="stylesheet" href="../css/footer.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/faq.css">
     <title>FAQ & CGV - B'OR</title>
 </head>
-<body>    <header>
+<body>    
+    <header>
         <nav class="navbar">
             <div class="brand">
                 <a href="../index.html" title="B'OR - Accueil">B'OR</a>
-            </div>
-            <ul class="nav-links">
+            </div>            <ul class="nav-links">
                 <li><a href="../index.html">Accueil</a></li>
+                <li><a href="login.html">Connexion</a></li>
                 <li><a href="boutique.html">Boutique</a></li>
                 <li><a href="a-propos.html">À propos</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="faq-cgv.html" aria-current="page">FAQ / CGV</a></li>
                 <li class="cart">
-                    <a href="panier.html" title="Voir mon panier">
+                    <a href="panier.html" title="Voir mon panier">  Panier
                         <iconify-icon icon="mdi:cart" width="24" height="24"></iconify-icon>
                         <span class="cart-count">0</span>
                     </a>
@@ -36,13 +37,103 @@
 
     <main>
         <section class="faq">
-            <!-- La FAQ sera ajoutée ici -->
-        </section>
-        <section class="cgv">
-            <!-- Les CGV seront ajoutées ici -->
+            <h1>Questions Fréquemment Posées</h1>
+
+            <div class="faq-category">
+                <h2>
+                    <iconify-icon icon="mdi:truck-delivery" width="24" height="24"></iconify-icon>
+                    Livraison
+                </h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels sont les délais de livraison ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous livrons généralement sous 2-4 jours ouvrés en France métropolitaine. Pour les autres destinations, le délai peut varier entre 5-10 jours ouvrés.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>La livraison est-elle gratuite ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La livraison est gratuite pour toute commande supérieure à 50€ en France métropolitaine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2>
+                    <iconify-icon icon="mdi:credit-card" width="24" height="24"></iconify-icon>
+                    Paiement
+                </h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels moyens de paiement acceptez-vous ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les cartes bancaires (Visa, Mastercard), PayPal, et les virements bancaires.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Les paiements sont-ils sécurisés ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, tous nos paiements sont sécurisés avec un cryptage SSL et nous utilisons des processeurs de paiement reconnus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2>
+                    <iconify-icon icon="mdi:diamond-stone" width="24" height="24"></iconify-icon>
+                    Produits
+                </h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Les bijoux sont-ils garantis ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, tous nos bijoux sont garantis 1 an contre les défauts de fabrication.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment entretenir mes bijoux ?</span>
+                        <iconify-icon icon="mdi:chevron-down" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous recommandons de nettoyer régulièrement vos bijoux avec un chiffon doux et de les stocker dans leur écrin d'origine. Évitez le contact avec l'eau et les produits chimiques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        <section class="cgv">
+            <h2>Conditions Générales de Vente</h2>
+            <div class="cgv-content">
+                <h3>1. Dispositions générales</h3>
+                <p>Les présentes conditions générales de vente s'appliquent à toutes les ventes conclues sur le site B'OR.</p>
+
+                <h3>2. Prix</h3>
+                <p>Les prix sont indiqués en euros et s'entendent TTC. Ils ne comprennent pas les frais de livraison, facturés en supplément du prix des produits.</p>
+
+                <h3>3. Commandes</h3>
+                <p>Le client qui souhaite acheter un produit doit obligatoirement suivre le processus de commande en ligne. La confirmation de la commande entraîne l'acceptation des présentes conditions de vente.</p>
+
+                <h3>4. Livraison</h3>
+                <p>Les produits sont livrés à l'adresse de livraison indiquée au cours du processus de commande. Les délais de livraison sont donnés à titre indicatif.</p>
+
+                <h3>5. Droit de rétractation</h3>
+                <p>Conformément aux dispositions légales en vigueur, vous disposez d'un délai de 14 jours à compter de la réception de vos produits pour exercer votre droit de rétractation.</p>
+            </div>
         </section>
     </main>
-        <footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>À propos de B'OR</h3>
@@ -63,11 +154,11 @@
             <div class="footer-section">
                 <h3>Liens rapides</h3>
                 <ul class="footer-links">
-                    <li><a href="pages/boutique.html">Notre collection</a></li>
-                    <li><a href="pages/a-propos.html">À propos de nous</a></li>
-                    <li><a href="pages/contact.html">Contact</a></li>
-                    <li><a href="pages/faq-cgv.html">FAQ</a></li>
-                    <li><a href="pages/faq-cgv.html#cgv">CGV</a></li>
+                    <li><a href="boutique.html">Notre collection</a></li>
+                    <li><a href="a-propos.html">À propos de nous</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq-cgv.html">FAQ</a></li>
+                    <li><a href="faq-cgv.html#cgv">CGV</a></li>
                 </ul>
             </div>
 
@@ -105,10 +196,8 @@
                 <h3>Newsletter</h3>
                 <p>Inscrivez-vous pour recevoir nos dernières offres et nouveautés.</p>
                 <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Votre email" aria-label="Adresse email pour la newsletter">
-                    <button type="submit" aria-label="S'inscrire à la newsletter">
-                        <iconify-icon icon="mdi:send"></iconify-icon>
-                    </button>
+                    <input type="email" placeholder="Votre email" aria-label="Votre email" required>
+                    <button type="submit">S'inscrire</button>
                 </form>
             </div>
         </div>
@@ -116,13 +205,9 @@
         <div class="footer-bottom">
             <div class="payment-methods">
                 <iconify-icon icon="logos:visa" width="40"></iconify-icon>
-                <iconify-icon icon="logos:mastercard" width="40"></iconify-icon>
-                <iconify-icon icon="logos:paypal" width="40"></iconify-icon>
-                <iconify-icon icon="simple-icons:orangemoney" width="40"></iconify-icon>
             </div>
-            <p>&copy; 2025 B'OR. Tous droits réservés.</p>
         </div>
     </footer>
-    <script src="../script.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </body>
 </html>

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paiement sécurisé - B'OR bijoux">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="../style.css">
-        <link rel="stylesheet" href="../css/footer.css">
-    <title>Paiement - B'OR</title>
+    <link rel="stylesheet" href="../css/payment.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <title>Paiement sécurisé - B'OR</title>
 </head>
-<body>    <header>
+<body>    
+    <header>
         <nav class="navbar">
             <div class="brand">
                 <a href="../index.html">B'OR</a>
@@ -20,7 +23,7 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li class="cart">
                     <a href="panier.html">
-                        <iconify-icon icon="mdi:cart"></iconify-icon>
+                        <iconify-icon icon="mdi:cart"></iconify-icon>  Panier
                         <span class="cart-count">0</span>
                     </a>
                 </li>
@@ -32,12 +35,128 @@
             </button>
         </nav>
     </header>
-    <main>
-        <section class="checkout-form">
-            <!-- Le formulaire de paiement sera ajouté ici -->
-        </section>
+
+    <main class="payment-container">
+        <div class="payment-header">
+            <h1>Finaliser votre commande</h1>
+            <p>Paiement sécurisé par cryptage SSL</p>
+        </div>
+
+        <div class="payment-grid">
+            <div class="order-summary">
+                <h2>Résumé de la commande</h2>
+                <div class="order-details">
+                    <div class="order-item">
+                        <span>Sous-total</span>
+                        <span id="subtotal">0,00 €</span>
+                    </div>
+                    <div class="order-item">
+                        <span>Frais de livraison</span>
+                        <span id="shipping">0,00 €</span>
+                    </div>
+                    <div class="order-total">
+                        <span>Total</span>
+                        <span id="total">0,00 €</span>
+                    </div>
+                </div>
+            </div>            <div class="payment-form">
+                <h2>Choisir le mode de paiement</h2>
+                <div class="payment-methods-selector">
+                    <div class="payment-method-choice">
+                        <input type="radio" id="card-payment" name="payment-method" value="card" checked>
+                        <label for="card-payment">
+                            <iconify-icon icon="mdi:credit-card"></iconify-icon>
+                            Carte bancaire
+                        </label>
+                    </div>
+                    <div class="payment-method-choice">
+                        <input type="radio" id="airtel-money" name="payment-method" value="airtel">
+                        <label for="airtel-money">
+                            <iconify-icon icon="simple-icons:airtel"></iconify-icon>
+                            Airtel Money
+                        </label>
+                    </div>
+                    <div class="payment-method-choice">
+                        <input type="radio" id="moov-money" name="payment-method" value="moov">
+                        <label for="moov-money">
+                            <iconify-icon icon="mdi:cash-multiple"></iconify-icon>
+                            Moov Money
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Formulaire Carte Bancaire -->
+                <form id="card-payment-form" class="payment-method-form">
+                    <h3>Paiement par carte bancaire</h3>
+                    <div class="form-group">
+                        <label for="cardholder">Nom sur la carte</label>
+                        <input type="text" id="cardholder" required placeholder="Ex: Jean Dupont">
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="cardnumber">Numéro de carte</label>
+                            <input type="text" id="cardnumber" required placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry">Date d'expiration</label>
+                            <input type="text" id="expiry" required placeholder="MM/AA">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvc">CVC</label>
+                            <input type="text" id="cvc" required placeholder="123">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <iconify-icon icon="mdi:lock"></iconify-icon>
+                        Payer par carte
+                    </button>
+                </form>
+
+                <!-- Formulaire Airtel Money -->
+                <form id="airtel-money-form" class="payment-method-form" style="display: none;">
+                    <h3>Paiement par Airtel Money</h3>
+                    <div class="form-group">
+                        <label for="airtel-phone">Numéro de téléphone Airtel</label>
+                        <input type="tel" id="airtel-phone" class="mobile-money-input" required placeholder="07XXXXXX">
+                        <small>Entrez votre numéro Airtel Money (commence par 07)</small>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        Payer maintenant
+                    </button>
+                </form>
+
+                <!-- Formulaire Moov Money -->
+                <form id="moov-money-form" class="payment-method-form" style="display: none;">
+                    <h3>Paiement par Moov Money</h3>
+                    <div class="form-group">
+                        <label for="moov-phone">Numéro de téléphone Moov</label>
+                        <input type="tel" id="moov-phone" class="mobile-money-input" required placeholder="07XXXXXX">
+                        <small>Entrez votre numéro Moov Money (commence par 07)</small>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        Payer maintenant
+                    </button>
+                </form>
+
+                <div class="security-info">
+                    <p>
+                        <iconify-icon icon="mdi:shield-check"></iconify-icon>
+                        Paiement sécurisé par cryptage SSL
+                    </p>
+                    <div class="payment-methods-icons">
+                        <iconify-icon icon="logos:visa"></iconify-icon>
+                        <iconify-icon icon="logos:mastercard"></iconify-icon>
+                        <iconify-icon icon="logos:paypal"></iconify-icon>
+                        <iconify-icon icon="logos:apple-pay"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-        <footer>
+    
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>À propos de B'OR</h3>
@@ -58,11 +177,11 @@
             <div class="footer-section">
                 <h3>Liens rapides</h3>
                 <ul class="footer-links">
-                    <li><a href="pages/boutique.html">Notre collection</a></li>
-                    <li><a href="pages/a-propos.html">À propos de nous</a></li>
-                    <li><a href="pages/contact.html">Contact</a></li>
-                    <li><a href="pages/faq-cgv.html">FAQ</a></li>
-                    <li><a href="pages/faq-cgv.html#cgv">CGV</a></li>
+                    <li><a href="boutique.html">Notre collection</a></li>
+                    <li><a href="a-propos.html">À propos de nous</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq-cgv.html">FAQ</a></li>
+                    <li><a href="faq-cgv.html#cgv">CGV</a></li>
                 </ul>
             </div>
 
@@ -118,6 +237,7 @@
             <p>&copy; 2025 B'OR. Tous droits réservés.</p>
         </div>
     </footer>
-    <script src="../script.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="../script/payment.js"></script>
 </body>
 </html>
