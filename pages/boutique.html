@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvrez notre collection exclusive de bijoux B'OR - Une sélection raffinée pour tous les styles">
     <meta name="theme-color" content="#D4AF37">
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/boutique.css">
     <title>Boutique B'OR | Collection de Bijoux Élégants</title>
 </head>
-<body>    <header>
+<body>
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <header>
         <nav class="navbar">
             <div class="brand">
                 <a href="../index.html" title="B'OR - Accueil">B'OR</a>
@@ -33,18 +42,190 @@
                 <span class="bar"></span>
             </button>
         </nav>
-    </header>
+    </header>    <div class="filters-overlay"></div>
+    <button class="filter-toggle-mobile" aria-label="Afficher les filtres">
+        <iconify-icon icon="mdi:filter" width="24" height="24"></iconify-icon>
+    </button>
+
     <main>
-        <section class="filters">
-            <!-- Les filtres seront ajoutés ici -->
+        <section class="filters" aria-label="Filtres de recherche">
+            <div class="filter-container">
+                <h2 class="filter-title">Filtres</h2>
+                <button class="filter-close" aria-label="Fermer les filtres">
+                    <iconify-icon icon="mdi:close" width="24" height="24"></iconify-icon>
+                </button>
+                
+                <div class="filter-groups-container">
+                    <div class="filter-group">
+                        <button class="filter-toggle" aria-expanded="false" aria-controls="genre-options">
+                            <span>Genre</span>
+                            <iconify-icon icon="mdi:chevron-down" class="toggle-icon"></iconify-icon>
+                        </button>
+                        <div class="filter-options" id="genre-options" role="region">
+                            <label class="filter-option">
+                                <input type="checkbox" name="genre" value="femme">
+                                <span class="checkmark"></span>
+                                Femme
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="genre" value="homme">
+                                <span class="checkmark"></span>
+                                Homme
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="genre" value="unisexe">
+                                <span class="checkmark"></span>
+                                Unisexe
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <button class="filter-toggle" aria-expanded="false" aria-controls="type-options">
+                            <span>Type</span>
+                            <iconify-icon icon="mdi:chevron-down" class="toggle-icon"></iconify-icon>
+                        </button>
+                        <div class="filter-options" id="type-options" role="region">
+                            <label class="filter-option">
+                                <input type="checkbox" name="type" value="colliers">
+                                <span class="checkmark"></span>
+                                Colliers
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="type" value="bracelets">
+                                <span class="checkmark"></span>
+                                Bracelets
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="type" value="bagues">
+                                <span class="checkmark"></span>
+                                Bagues
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="type" value="boucles">
+                                <span class="checkmark"></span>
+                                Boucles d'oreilles
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <button class="filter-toggle" aria-expanded="false" aria-controls="matiere-options">
+                            <span>Matière</span>
+                            <iconify-icon icon="mdi:chevron-down" class="toggle-icon"></iconify-icon>
+                        </button>
+                        <div class="filter-options" id="matiere-options" role="region">
+                            <label class="filter-option">
+                                <input type="checkbox" name="matiere" value="or">
+                                <span class="checkmark"></span>
+                                Or 18 carats
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="matiere" value="argent">
+                                <span class="checkmark"></span>
+                                Argent 925
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="matiere" value="or-rose">
+                                <span class="checkmark"></span>
+                                Or rose
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="matiere" value="plaque-or">
+                                <span class="checkmark"></span>
+                                Plaqué or
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <button class="filter-toggle" aria-expanded="false" aria-controls="prix-options">
+                            <span>Prix</span>
+                            <iconify-icon icon="mdi:chevron-down" class="toggle-icon"></iconify-icon>
+                        </button>
+                        <div class="filter-options" id="prix-options" role="region">
+                            <div class="price-range">
+                                <input type="range" min="0" max="50000" value="50000" step="1000" class="slider" id="priceRange" aria-label="Filtre de prix">
+                                <div class="price-values">
+                                    <span>0 Fcfa</span>
+                                    <span>50.000 Fcfa</span>
+                                </div>
+                                <div class="selected-price">
+                                    Prix maximum : <span id="priceValue">50.000 Fcfa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="button" class="apply-filters">
+                        <iconify-icon icon="mdi:filter" class="button-icon"></iconify-icon>
+                        Appliquer
+                    </button>
+                    <button type="button" class="reset-filters">
+                        <iconify-icon icon="mdi:refresh" class="button-icon"></iconify-icon>
+                        Réinitialiser
+                    </button>
+                </div>
+            </div>
         </section>
-        <section class="products-grid">
-            <!-- La grille des produits sera ajoutée ici -->
+         <div class="boutique-header">
+            <h1>Notre Collection</h1>
+            <p class="subtitle">Découvrez nos bijoux raffinés et élégants</p>
+        </div>
+
+        <section class="products-section">
+            <div class="products-header">
+                <h2>Nos Bijoux</h2>
+                <div class="products-count">
+                    <span id="products-total">5</span> produits disponibles
+                </div>
+            </div>
+            
+            <div class="products-grid" id="products-container">
+                <!-- Les produits seront injectés ici par JavaScript -->
+            </div>
+
+            <template id="product-template">
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="" alt="" loading="lazy" />
+                        <div class="product-overlay">
+                            <button class="quick-view">
+                                <iconify-icon icon="mdi:eye" width="20" height="20"></iconify-icon>
+                                Voir détails
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3></h3>
+                        <p class="category"></p>
+                        <div class="product-details">
+                            <p class="description"></p>
+                            <p class="specs">
+                                <span class="material"></span>
+                                <span class="stock-status"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-info">
+                            <span class="price"></span>
+                            <span class="stock-qty"></span>
+                        </div>
+                        <button class="add-to-cart">
+                            <iconify-icon icon="mdi:cart-plus" width="20" height="20"></iconify-icon>
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </template>
         </section>
     </main>
-    <footer>
-        <!-- Le footer sera ajouté ici -->
-    </footer>
+
+    <script src="../script/products-data.js"></script>
     <script src="../script.js"></script>
+    <script src="../script/boutique.js"></script>
 </body>
 </html>

@@ -51,80 +51,61 @@
     <!-- section pour les produit  -->
     <section class="bijoux-acceuil">
         <h2>Découvrez nos bijoux</h2>
-        <div class="carte-produit">
-       <div class="product-card">
-            <div class="image-container">
-            <img src="img/collier2.jpeg" alt="Collier Élégance" />
+        <section class="products-section">
+            <div class="products-header">
+                <h2>Nos Bijoux</h2>
+                <div class="products-count">
+                    <span id="products-total">5</span> produits disponibles
+                </div>
             </div>
-            <div class="product-info">
-            <h3>Collier Élégant</h3>
-            <p class="category">COLLIERS</p>
+            
+            <div class="products-grid" id="products-container">
+                <!-- Les produits seront injectés ici par JavaScript -->
             </div>
-            <div class="product-footer">
-            <span class="price">10.000 Fcfa</span>
-            <button class="view-cart">voir le panier</button>
-            </div>
-        </div>
-         <div class="product-card">
-            <div class="image-container">
-            <img src="img/boucles.jpeg" alt="Collier Élégance" />
-            </div>
-            <div class="product-info">
-            <h3>boucles Élégantes</h3>
-            <p class="category">boucles</p>
-            </div>
-            <div class="product-footer">
-            <span class="price">10.000 Fcfa</span>
-            <button class="view-cart">voir le panier</button>
-            </div>
-        </div>
-         <div class="product-card">
-            <div class="image-container">
-            <img src="img/colier4.jpeg" alt="Collier Élégance" />
-            </div>
-            <div class="product-info">
-            <h3>Colliers chic</h3>
-            <p class="category">Colliers</p>
-            </div>
-            <div class="product-footer">
-            <span class="price">10.000 Fcfa</span>
-            <button class="view-cart">voir le panier</button>
-            </div>
-        </div>
-         <div class="product-card">
-            <div class="image-container">
-            <img src="img/collier5.jpeg" alt="Collier Élégance" />
-            </div>
-            <div class="product-info">
-            <h3>Colliers chic</h3>
-            <p class="category">Colliers</p>
-            </div>
-            <div class="product-footer">
-            <span class="price">10.000 Fcfa</span>
-            <button class="view-cart">voir le panier</button>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="image-container">
-            <img src="img/bague.jpeg" alt="Bague Élégante" />
-            </div>
-            <div class="product-info">
-            <h3>Bague Élégante</h3>
-            <p class="category">Bagues</p>
-            </div>
-            <div class="product-footer">
-            <span class="price">10.000 Fcfa</span>
-            <button class="view-cart">voir le panier</button>
-            </div>
-        </div>
-        </div>
+
+            <template id="product-template">
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="" alt="" loading="lazy" />
+                        <div class="product-overlay">
+                            <button class="quick-view">
+                                <iconify-icon icon="mdi:eye" width="20" height="20"></iconify-icon>
+                                Voir détails
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3></h3>
+                        <p class="category"></p>
+                        <div class="product-details">
+                            <p class="description"></p>
+                            <p class="specs">
+                                <span class="material"></span>
+                                <span class="stock-status"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-info">
+                            <span class="price"></span>
+                            <span class="stock-qty"></span>
+                        </div>
+                        <button class="add-to-cart">
+                            <iconify-icon icon="mdi:cart-plus" width="20" height="20"></iconify-icon>
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </section>
     </section>
     <!-- section a propos -->
      <section class="a-propos">
         <h2>A propos de B'OR</h2>
     <div class="paragraphe"><p>B'OR est une marque dédiée à la création de bijoux uniques et raffinés. Notre passion pour l'artisanat et le
          design se reflète dans chaque pièce que nous proposons.</p></div>
-     </section>
-    <script src="script.js"></script>
+     </section>   
+      <script src="script/products-data.js"></script>
+    <script src="script/home.js"></script>
 </body>
 </html>
