@@ -48,6 +48,15 @@ document.addEventListener('DOMContentLoaded', function() {
             card.dataset.type = product.category;
             card.dataset.matiere = product.matiere;
             card.dataset.price = product.price;
+            card.dataset.id = product.id; // Ajouter l'ID du produit
+
+            // Ajouter le gestionnaire de clic sur la carte produit
+            card.addEventListener('click', () => {
+                // Stocker les données du produit dans le localStorage
+                localStorage.setItem('selectedProduct', JSON.stringify(product));
+                // Rediriger vers la page produit
+                window.location.href = './produit.html';
+            });
 
             // Image
             const img = clone.querySelector('img');
