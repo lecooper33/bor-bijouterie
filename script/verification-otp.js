@@ -1,56 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
     const otpForm = document.getElementById('otpForm');
     const otpMessage = document.getElementById('otpMessage');
-    const resendLink = document.getElementById('resendOtp');
-    const otpInputs = document.querySelectorAll('.otp-inputs input');
-
-    // Auto-focus et navigation entre les champs OTP
-    otpInputs.forEach((input, index) => {
-        input.addEventListener('input', () => {
-            if (input.value.length === 1) {
-                if (index < otpInputs.length - 1) {
-                    otpInputs[index + 1].focus();
-                }
-            }
-        });
+    const resendOtp = document.getElementById('resendOtp');
+    const otpCode = document.getElementById('otpCode');
+    const otpTimer = document.getElementById('otpTimer');
+    const countdown = document.getElementById('countdown');
+    
+    // Désactiver le bouton de renvoi initialement
+    resendOtp.disabled = true;
+    
+    // Timer pour le renvoi d'OTP
+    let timeLeft = 60;
+    const timer = setInterval(() => {
+        timeLeft--;
+        countdown.textContent = timeLeft;
         
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && input.value.length === 0) {
-                if (index > 0) {
-                    otpInputs[index - 1].focus();
-                }
-            }
-        });
-    });
-
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            otpTimer.style.display = 'none';
+            resendOtp.disabled = false;
+        }
+    }, 1000);
+    
+    // Auto-focus sur le champ OTP
+    otpCode.focus();
+    
     // Vérification de l'OTP
     otpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const otpCode = Array.from(otpInputs).map(input => input.value).join('');
+        const code = otpCode.value.trim();
         const pendingUser = JSON.parse(localStorage.getItem('pendingUser'));
         
         if (!pendingUser) {
-            otpMessage.textContent = 'Session expirée, veuillez recommencer l\'inscription.';
-            otpMessage.style.color = 'red';
+            showMessage('Session expirée, veuillez recommencer l\'inscription.', 'error');
             return;
         }
-
+        
+        if (code.length !== 6 || !/^\d+$/.test(code)) {
+            showMessage('Veuillez entrer un code OTP valide à 6 chiffres', 'error');
+            return;
+        }
+        
         try {
-            const response = await fetch('/verifier-otp', {
+            const response = await fetch('http://localhost:4000/inscription/verifier-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     email: pendingUser.email, 
-                    otp: otpCode 
+                    otp: code 
                 })
             });
             
             const data = await response.json();
             
             if (response.ok) {
-                otpMessage.textContent = 'Vérification réussie !';
-                otpMessage.style.color = 'green';
+                showMessage('Vérification réussie ! Redirection en cours...', 'success');
                 
                 // Stocker les informations de l'utilisateur
                 localStorage.setItem('user', JSON.stringify({
@@ -67,29 +72,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = '../index.html';
                 }, 1500);
             } else {
-                otpMessage.textContent = data.message || 'Code OTP incorrect';
-                otpMessage.style.color = 'red';
+                showMessage(data.message || 'Code OTP incorrect', 'error');
             }
         } catch (err) {
             console.error('Erreur lors de la vérification:', err);
-            otpMessage.textContent = 'Erreur lors de la vérification';
-            otpMessage.style.color = 'red';
+            showMessage('Erreur lors de la vérification', 'error');
         }
     });
-
+    
     // Renvoyer l'OTP
-    resendLink.addEventListener('click', async (e) => {
-        e.preventDefault();
+    resendOtp.addEventListener('click', async () => {
         const pendingUser = JSON.parse(localStorage.getItem('pendingUser'));
         
         if (!pendingUser) {
-            otpMessage.textContent = 'Session expirée, veuillez recommencer l\'inscription.';
-            otpMessage.style.color = 'red';
+            showMessage('Session expirée, veuillez recommencer l\'inscription.', 'error');
             return;
         }
-
+        
         try {
-            const response = await fetch('/renvoyer-otp', {
+            const response = await fetch('http://localhost:4000/inscription/renvoyer-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: pendingUser.email })
@@ -98,16 +99,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             
             if (response.ok) {
-                otpMessage.textContent = 'Un nouveau code a été envoyé à votre email.';
-                otpMessage.style.color = 'green';
+                showMessage('Un nouveau code a été envoyé à votre email.', 'success');
+                
+                // Réinitialiser le timer
+                timeLeft = 60;
+                countdown.textContent = timeLeft;
+                otpTimer.style.display = 'block';
+                resendOtp.disabled = true;
+                
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    countdown.textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        otpTimer.style.display = 'none';
+                        resendOtp.disabled = false;
+                    }
+                }, 1000);
             } else {
-                otpMessage.textContent = data.message || 'Erreur lors de l\'envoi du code';
-                otpMessage.style.color = 'red';
+                showMessage(data.message || 'Erreur lors de l\'envoi du code', 'error');
             }
         } catch (err) {
             console.error('Erreur:', err);
-            otpMessage.textContent = 'Erreur lors de l\'envoi du code';
-            otpMessage.style.color = 'red';
+            showMessage('Erreur lors de l\'envoi du code', 'error');
         }
     });
+    
+    function showMessage(message, type) {
+        otpMessage.textContent = message;
+        otpMessage.className = 'otp-message';
+        otpMessage.classList.add(`otp-message--${type}`);
+    }
 });
