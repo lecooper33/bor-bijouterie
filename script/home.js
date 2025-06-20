@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         return card;
     };
-    // Afficher tous les produits
-    products.forEach(product => {
+    // Afficher seulement les 8 premiers produits
+    products.slice(0, 8).forEach(product => {
         productsContainer.appendChild(createProductCard(product));
     });
 });

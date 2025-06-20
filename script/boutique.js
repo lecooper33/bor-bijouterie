@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mise à jour des attributs data-* selon la nouvelle structure
             const card = clone.querySelector('.product-card');
             card.dataset.genre = product.genre;
-            card.dataset.id_categorie = product.id_categorie;
+            card.dataset.id_categorie = Array.isArray(product.id_categorie) ? product.id_categorie.join(',') : product.id_categorie;
             card.dataset.matieres = product.matieres;
             card.dataset.prix = product.prix;
             card.dataset.id_produit = product.id_produit; // Ajouter l'ID du produit
@@ -64,7 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Informations du produit
             clone.querySelector('h3.nom').textContent = product.nom;
-            clone.querySelector('.categorie').textContent = product.id_categorie;
+            // Affichage des catégories : si tableau, afficher les noms séparés, sinon afficher l'ID
+            if (Array.isArray(product.id_categorie)) {
+                // Si tu as accès à la liste des catégories, tu peux afficher les noms ici
+                clone.querySelector('.categorie').textContent = product.id_categorie.map(id => {
+                    const cat = (typeof categories !== 'undefined') ? categories.find(c => c.id_categorie == id) : null;
+                    return cat ? cat.nom : id;
+                }).join(', ');
+            } else {
+                const cat = (typeof categories !== 'undefined') ? categories.find(c => c.id_categorie == product.id_categorie) : null;
+                clone.querySelector('.categorie').textContent = cat ? cat.nom : product.id_categorie;
+            }
             clone.querySelector('.description').textContent = product.description;
             clone.querySelector('.matieres').textContent = product.matieres.replace('-', ' ').toUpperCase();
             
@@ -101,7 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const filteredProducts = products.filter(product => {
             const genreMatch = selectedFilters.genres.length === 0 || selectedFilters.genres.includes(product.genre);
-            const categorieMatch = selectedFilters.id_categories.length === 0 || selectedFilters.id_categories.includes(String(product.id_categorie));
+            // Adaptation pour gérer id_categorie tableau ou nombre
+            let categorieMatch = false;
+            if (selectedFilters.id_categories.length === 0) {
+                categorieMatch = true;
+            } else if (Array.isArray(product.id_categorie)) {
+                categorieMatch = product.id_categorie.some(id => selectedFilters.id_categories.includes(String(id)));
+            } else {
+                categorieMatch = selectedFilters.id_categories.includes(String(product.id_categorie));
+            }
             const matiereMatch = selectedFilters.matieres.length === 0 || selectedFilters.matieres.includes(product.matieres);
             const prixMatch = product.prix <= selectedFilters.maxPrix;
 

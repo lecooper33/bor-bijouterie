@@ -11,10 +11,12 @@
 }
 
 .faq-item {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
+    background: #fcfcfc;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 
 .faq-question {
@@ -24,31 +26,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s;
+    border-bottom: 1px solid #ececec;
+    outline: none;
 }
 
-.faq-question:hover {
+.faq-question:focus, .faq-question:hover {
     background: #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.faq-question iconify-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-question.active iconify-icon {
-    transform: rotate(180deg);
+.faq-question span {
+    font-weight: 500;
+    color: #222;
 }
 
 .faq-answer {
     padding: 0 1rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+    background: #fff;
 }
 
 .faq-answer.active {
     padding: 1rem;
     max-height: 500px;
+    opacity: 1;
+    border-top: 1px solid #ececec;
 }
 
 .faq-category {
@@ -61,4 +67,44 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.cgv {
+    max-width: 800px;
+    margin: 3rem auto 2rem auto;
+    padding: 2rem 1.5rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.cgv h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.cgv-content {
+    color: #444;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.cgv-content h3 {
+    color: #b08d57;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.cgv-content p {
+    margin-bottom: 1.2rem;
+    background: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
 }
