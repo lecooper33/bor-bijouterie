@@ -7,7 +7,6 @@ function displayCart() {
     const cartContainer = document.querySelector('main');
 
     if (cart.length === 0) {
-        // Afficher le message de panier vide
         cartContainer.innerHTML = `
             <div class="empty-cart">
                 <iconify-icon icon="mdi:cart-off"></iconify-icon>
@@ -19,7 +18,6 @@ function displayCart() {
         return;
     }
 
-    // Créer la structure du panier
     cartContainer.innerHTML = `
         <div class="cart-container">
             <section class="cart-items">
@@ -49,7 +47,6 @@ function displayCart() {
 
     const itemsList = document.querySelector('.items-list');
     
-    // Afficher chaque article
     cart.forEach(item => {
         const itemElement = createCartItemElement(item);
         itemsList.appendChild(itemElement);
@@ -126,7 +123,7 @@ function updateCartTotal() {
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     
     document.querySelector('.subtotal').textContent = formatPrice(subtotal);
-    document.querySelector('.total').textContent = formatPrice(subtotal); // Pas de frais de livraison
+    document.querySelector('.total').textContent = formatPrice(subtotal);
 }
 
 function formatPrice(price) {
@@ -144,46 +141,78 @@ function updateCartCount() {
 
 function proceedToCheckout() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    // Récupérer l'id_client depuis le localStorage ou session (à adapter selon votre logique d'authentification)
-    const id_client = localStorage.getItem('id_client');
-    if (!id_client) {
-        alert('Veuillez vous connecter pour passer commande.');
+    if (cart.length === 0) {
+        alert('Votre panier est vide');
+        return;
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.id) {
+        alert('Veuillez vous connecter pour passer une commande');
         window.location.href = 'login.html';
         return;
     }
-    if (cart.length === 0) {
-        alert('Votre panier est vide.');
-        return;
-    }
-    // Préparer les données pour l'API
+    // Préparer les données pour l'API (clé quantité avec accent !)
     const produits = cart.map(item => ({
-        id_produit: item.id_produit || item.id, // selon la structure harmonisée
-        quantite: item.quantity
+        id_produit: item.id_produit || item.id,
+        quantité: item.quantity, // clé correcte pour l'API
+        prix_unitaire: item.price
     }));
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Données complètes de la commande
     const commandeData = {
-        id_client,
-        produits,
-        total
+        id_client: user.id,
+        mode_paiement: 'Espèces', // Correction : valeur attendue par l'API
+        adresse_livraison: user.adresse || 'port_gentil',
+        produits: produits
     };
-    // Envoyer la commande au back-end
+    console.log('Données envoyées au serveur:', commandeData);
     fetch('http://localhost:4000/commandes', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token || ''}`
+        },
         body: JSON.stringify(commandeData)
     })
-    .then(res => res.json())
+    .then(async response => {
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Erreur HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        if (data.success || data.message === 'Commande créée avec succès') {
-            alert('Commande créée avec succès !');
-            localStorage.removeItem('cart');
+        if (data.id_commande) {
+            alert('Commande créée avec succès!');
             updateCartCount();
-            window.location.href = 'paiement.html';
+            window.location.href = 'paiement.html?commande=' + encodeURIComponent(data.id_commande);
         } else {
-            alert(data.message || 'Erreur lors de la création de la commande.');
+            throw new Error(data.message || 'Erreur lors de la création de la commande');
         }
     })
-    .catch(() => {
-        alert('Erreur lors de la création de la commande.');
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert(`Erreur lors de la commande: ${error.message}`);
+        if (error.response) {
+            error.response.json().then(errData => {
+                console.error('Détails de l\'erreur:', errData);
+            });
+        }
     });
 }
+
+// Vérifier l'authentification au chargement
+function checkAuth() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.id) {
+        window.location.href = 'login.html';
+    }
+}
+
+// Initialiser le panier au chargement
+function initCart() {
+    updateCartCount();
+    checkAuth();
+}
+
+// Appeler initCart lorsque la page est chargée
+window.onload = initCart;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification OTP - B'OR</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="otp-container">
+        <form id="otpForm">
+            <h1>Vérification OTP</h1>
+            <p>Un code de vérification a été envoyé à votre adresse email.</p>
+            
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" pattern="[0-9]">
+                <input type="text" maxlength="1" pattern="[0-9]">
+                <input type="text" maxlength="1" pattern="[0-9]">
+                <input type="text" maxlength="1" pattern="[0-9]">
+                <input type="text" maxlength="1" pattern="[0-9]">
+                <input type="text" maxlength="1" pattern="[0-9]">
+            </div>
+            
+            <button type="submit">Vérifier</button>
+            <p id="otpMessage"></p>
+            <p class="resend-link">
+                Vous n'avez pas reçu de code ? <a href="#" id="resendOtp">Renvoyer le code</a>
+            </p>
+        </form>
+    </div>
+
+    <script src="../script/verification-otp.js"></script>
+</body>
+</html>

@@ -259,44 +259,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentCart.forEach(item => {
                         total += item.price * item.quantity;
                     });
-                    const shipping = total > 100000 ? 0 : 3000;
-                    total += shipping;
 
-                    const submitButton = form.querySelector('.submit-button'); // Get button specific to this form
-                    if (submitButton) {
-                        submitButton.disabled = true;
-                        submitButton.innerHTML = '<iconify-icon icon="mdi:loading" class="spin"></iconify-icon> Traitement en cours...';
-                    }
-
-                    try {
-                        // In a production environment, send data securely to your backend
-                        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate payment gateway processing
-
-                        const order = {
-                            id: 'ORD-' + Date.now(),
-                            date: new Date().toISOString(),
-                            items: currentCart,
-                            total: total,
-                            shipping: shipping,
-                            paymentMethod: 'card',
-                            status: 'paid' // Assuming card payments are instantly paid
-                        };
-
-                        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-                        orders.push(order);
-                        localStorage.setItem('orders', JSON.stringify(orders));
-
-                        localStorage.removeItem('cart');
-
-                        window.location.href = 'confirmation.html?orderId=' + order.id + '&status=paid';
-                    } catch (error) {
-                        console.error('Erreur lors du traitement du paiement par carte:', error);
-                        alert('Une erreur est survenue lors du traitement de votre paiement par carte. Veuillez réessayer.');
-                        if (submitButton) {
-                            submitButton.disabled = false;
-                            submitButton.innerHTML = 'Payer';
-                        }
-                    }
+                    // Simuler le paiement réussi
+                    alert('Paiement par carte réussi !');
+                    localStorage.removeItem('cart'); // Vider le panier après paiement réussi
+                    updateOrderSummary && updateOrderSummary(); // Mettre à jour le résumé si besoin
+                    window.location.href = 'confirmation.html?status=success';
+                    return;
 
                 } else if (method === 'orange' || method === 'wave' || method === 'airtel' || method === 'moov') {
                     const phoneNumberInput = document.getElementById(`${method}-phone`);
