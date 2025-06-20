@@ -167,7 +167,7 @@ function proceedToCheckout() {
         total
     };
     // Envoyer la commande au back-end
-    fetch('/commandes', {
+    fetch('http://localhost:4000/commandes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(commandeData)

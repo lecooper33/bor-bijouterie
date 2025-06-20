@@ -2,17 +2,29 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez les détails de notre bijou exclusif - B'OR">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../css/produit.css">
-        <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <title>Détail du produit - B'OR</title>
 </head>
-<body>    <header>
+<body>
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <header>
         <nav class="navbar">
             <div class="brand">
                 <a href="../index.html" title="B'OR - Accueil">B'OR</a>
-            </div>            <ul class="nav-links">
+            </div>
+            <ul class="nav-links">
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="login.html">Connexion</a></li>
                 <li><a href="boutique.html">Boutique</a></li>
@@ -20,7 +32,7 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="faq-cgv.html">FAQ / CGV</a></li>
                 <li class="cart">
-                    <a href="panier.html" title="Voir mon panier">  Panier
+                    <a href="panier.html" title="Voir mon panier">Panier
                         <iconify-icon icon="mdi:cart" width="24" height="24"></iconify-icon>
                         <span class="cart-count">0</span>
                     </a>
@@ -33,11 +45,81 @@
             </button>
         </nav>
     </header>
-    <main>
-        <section class="product-detail">
-            <!-- Les détails du produit seront ajoutés ici -->
+
+    <main class="product-page">
+        <div class="breadcrumb">
+            <a href="../index.html">Accueil</a> &gt;
+            <a href="boutique.html">Boutique</a> &gt;
+            <span>Détail du produit</span>
+        </div>
+
+        <section class="product-detail-container">
+            <!-- Le contenu sera généré dynamiquement par JavaScript -->
+            <div class="product-detail">
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="main-product-image" src="" alt="">
+                    </div>
+                    <div class="thumbnail-images" id="thumbnail-container">
+                        <!-- Les miniatures seront ajoutées ici -->
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 id="product-name"></h1>
+                    <div class="product-meta">
+                        <span class="product-sku" id="product-sku"></span>
+                        <span class="product-rating">
+                            <iconify-icon icon="mdi:star" width="16" height="16"></iconify-icon>
+                            <iconify-icon icon="mdi:star" width="16" height="16"></iconify-icon>
+                            <iconify-icon icon="mdi:star" width="16" height="16"></iconify-icon>
+                            <iconify-icon icon="mdi:star" width="16" height="16"></iconify-icon>
+                            <iconify-icon icon="mdi:star-half" width="16" height="16"></iconify-icon>
+                            <span class="review-count">(12 avis)</span>
+                        </span>
+                    </div>
+                    
+                    <div class="product-price" id="product-price"></div>
+                    
+                    <div class="product-description" id="product-description"></div>
+                    
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn decrease" aria-label="Diminuer la quantité">-</button>
+                            <input type="number" id="product-quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn increase" aria-label="Augmenter la quantité">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" id="add-to-cart">
+                            <iconify-icon icon="mdi:cart-plus" width="20" height="20"></iconify-icon>
+                            Ajouter au panier
+                        </button>
+                    </div>
+                    
+                    <div class="product-details">
+                        <h3>Détails du produit</h3>
+                        <ul id="product-details-list">
+                            <!-- Rempli dynamiquement -->
+                        </ul>
+                    </div>
+                    
+                    <div class="product-share">
+                        <span>Partager :</span>
+                        <a href="#" aria-label="Partager sur Facebook"><iconify-icon icon="mdi:facebook" width="20" height="20"></iconify-icon></a>
+                        <a href="#" aria-label="Partager sur Twitter"><iconify-icon icon="mdi:twitter" width="20" height="20"></iconify-icon></a>
+                        <a href="#" aria-label="Partager sur Pinterest"><iconify-icon icon="mdi:pinterest" width="20" height="20"></iconify-icon></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="related-products">
+            <h2>Vous pourriez aussi aimer</h2>
+            <div class="products-grid" id="related-products-container">
+                <!-- Produits similaires chargés dynamiquement -->
+            </div>
         </section>
     </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -77,9 +159,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:contact@bior.com">
+                        <a href="mailto:contact@bor.com">
                             <iconify-icon icon="mdi:email"></iconify-icon>
-                            contact@bior.com
+                            contact@bor.com
                         </a>
                     </li>
                     <li>
@@ -100,8 +182,8 @@
             <div class="footer-section">
                 <h3>Newsletter</h3>
                 <p>Inscrivez-vous pour recevoir nos dernières offres et nouveautés.</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Votre email" aria-label="Adresse email pour la newsletter">
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Votre email" required>
                     <button type="submit" aria-label="S'inscrire à la newsletter">
                         <iconify-icon icon="mdi:send"></iconify-icon>
                     </button>
@@ -119,7 +201,7 @@
             <p>&copy; 2025 B'OR. Tous droits réservés.</p>
         </div>
     </footer>
-    <script src="../script.js"></script>
     <script src="../script/produit.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
