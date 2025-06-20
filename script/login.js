@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Appel API d'inscription
         try {
-            const response = await fetch('http://localhost:3000/api/inscription', {
+            const response = await fetch('/inscription', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            const response = await fetch('http://localhost:3000/api/verifier-otp', {
+            const response = await fetch('/verifier-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: pendingEmail, otp })
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Exemple d'appel API harmonisé (à adapter selon votre URL)
         
-        fetch('http://localhost:3000/api/connexion', {
+        fetch('/connexion', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginData)

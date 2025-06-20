@@ -1,8 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Récupérer les éléments nécessaires
     const productsContainer = document.getElementById('products-container');
     const template = document.getElementById('product-template');
     const productsTotal = document.getElementById('products-total');
+
+    // Charger les produits depuis l'API
+    let products = [];
+    try {
+        const res = await fetch('/produits');
+        products = await res.json();
+    } catch (error) {
+        console.error('Erreur lors du chargement des produits:', error);
+        // Afficher un message d'erreur ou fallback si besoin
+    }
 
     // Mettre à jour le nombre total de produits
     productsTotal.textContent = products.length;

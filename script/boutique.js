@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Gestion des filtres sur mobile
     const filtersSection = document.querySelector('.filters');
     const filterToggleBtn = document.querySelector('.filter-toggle-mobile');
@@ -196,9 +196,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Charger les produits et catégories depuis l'API
+    try {
+        const [productsRes, categoriesRes] = await Promise.all([
+            fetch('/produits'),
+            fetch('/categories')
+        ]);
+        products = await productsRes.json();
+        categories = await categoriesRes.json();
+    } catch (error) {
+        console.error('Erreur lors du chargement des données API:', error);
+        // Afficher un message d'erreur ou fallback
+    }
+
     // Appeler la fonction au chargement
     renderCategoryFilters();
-
-    // Afficher les produits initiaux
     displayProducts();
 });

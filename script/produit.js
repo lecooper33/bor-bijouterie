@@ -1,7 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Récupérer les données du produit du localStorage
-    const product = JSON.parse(localStorage.getItem('selectedProduct'));
-    
+document.addEventListener('DOMContentLoaded', async function() {
+    // Récupérer l'ID du produit depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id_produit = urlParams.get('id');
+    if (!id_produit) {
+        window.location.href = './boutique.html';
+        return;
+    }
+    // Charger le produit depuis l'API
+    let product = null;
+    try {
+        const res = await fetch(`/produits/${id_produit}`);
+        product = await res.json();
+    } catch (error) {
+        alert('Erreur lors du chargement du produit.');
+        window.location.href = './boutique.html';
+        return;
+    }
     if (!product) {
         window.location.href = './boutique.html';
         return;
