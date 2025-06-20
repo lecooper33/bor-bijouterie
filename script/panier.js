@@ -143,6 +143,47 @@ function updateCartCount() {
 }
 
 function proceedToCheckout() {
-    // Rediriger vers la page de paiement
-    window.location.href = 'paiement.html';
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Récupérer l'id_client depuis le localStorage ou session (à adapter selon votre logique d'authentification)
+    const id_client = localStorage.getItem('id_client');
+    if (!id_client) {
+        alert('Veuillez vous connecter pour passer commande.');
+        window.location.href = 'login.html';
+        return;
+    }
+    if (cart.length === 0) {
+        alert('Votre panier est vide.');
+        return;
+    }
+    // Préparer les données pour l'API
+    const produits = cart.map(item => ({
+        id_produit: item.id_produit || item.id, // selon la structure harmonisée
+        quantite: item.quantity
+    }));
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const commandeData = {
+        id_client,
+        produits,
+        total
+    };
+    // Envoyer la commande au back-end
+    fetch('http://localhost:3000/api/commandes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(commandeData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success || data.message === 'Commande créée avec succès') {
+            alert('Commande créée avec succès !');
+            localStorage.removeItem('cart');
+            updateCartCount();
+            window.location.href = 'paiement.html';
+        } else {
+            alert(data.message || 'Erreur lors de la création de la commande.');
+        }
+    })
+    .catch(() => {
+        alert('Erreur lors de la création de la commande.');
+    });
 }

@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, false);
 
     // Fonction pour formatter le prix
-    function formatPrice(price) {
-        return new Intl.NumberFormat('fr-FR').format(price) + ' Fcfa';
+    function formatPrice(prix) {
+        return new Intl.NumberFormat('fr-FR').format(prix) + ' Fcfa';
     }
 
     // Fonction pour afficher les produits
@@ -41,14 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         productsToShow.forEach(product => {
             const clone = template.content.cloneNode(true);
-            
-            // Image et attributs de données
+            // Mise à jour des attributs data-* selon la nouvelle structure
             const card = clone.querySelector('.product-card');
             card.dataset.genre = product.genre;
-            card.dataset.type = product.category;
-            card.dataset.matiere = product.matiere;
-            card.dataset.price = product.price;
-            card.dataset.id = product.id; // Ajouter l'ID du produit
+            card.dataset.id_categorie = product.id_categorie;
+            card.dataset.matieres = product.matieres;
+            card.dataset.prix = product.prix;
+            card.dataset.id_produit = product.id_produit; // Ajouter l'ID du produit
 
             // Ajouter le gestionnaire de clic sur la carte produit
             card.addEventListener('click', () => {
@@ -61,16 +60,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Image
             const img = clone.querySelector('img');
             img.src = product.image;
-            img.alt = product.name;
+            img.alt = product.nom;
 
             // Informations du produit
-            clone.querySelector('h3').textContent = product.name;
-            clone.querySelector('.category').textContent = product.category.toUpperCase();
+            clone.querySelector('h3.nom').textContent = product.nom;
+            clone.querySelector('.categorie').textContent = product.id_categorie;
             clone.querySelector('.description').textContent = product.description;
-            clone.querySelector('.material').textContent = product.matiere.replace('-', ' ').toUpperCase();
+            clone.querySelector('.matieres').textContent = product.matieres.replace('-', ' ').toUpperCase();
             
             // Prix et stock
-            clone.querySelector('.price').textContent = formatPrice(product.price);
+            clone.querySelector('.prix').textContent = formatPrice(product.prix);
             const stockStatus = clone.querySelector('.stock-status');
             const stockQty = clone.querySelector('.stock-qty');
             
@@ -95,18 +94,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function filterProducts() {
         const selectedFilters = {
             genres: Array.from(document.querySelectorAll('input[name="genre"]:checked')).map(input => input.value),
-            types: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value),
+            id_categories: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value),
             matieres: Array.from(document.querySelectorAll('input[name="matiere"]:checked')).map(input => input.value),
-            maxPrice: parseInt(document.getElementById('priceRange').value)
+            maxPrix: parseInt(document.getElementById('priceRange').value)
         };
 
         const filteredProducts = products.filter(product => {
             const genreMatch = selectedFilters.genres.length === 0 || selectedFilters.genres.includes(product.genre);
-            const typeMatch = selectedFilters.types.length === 0 || selectedFilters.types.includes(product.category);
-            const matiereMatch = selectedFilters.matieres.length === 0 || selectedFilters.matieres.includes(product.matiere);
-            const priceMatch = product.price <= selectedFilters.maxPrice;
+            const categorieMatch = selectedFilters.id_categories.length === 0 || selectedFilters.id_categories.includes(String(product.id_categorie));
+            const matiereMatch = selectedFilters.matieres.length === 0 || selectedFilters.matieres.includes(product.matieres);
+            const prixMatch = product.prix <= selectedFilters.maxPrix;
 
-            return genreMatch && typeMatch && matiereMatch && priceMatch;
+            return genreMatch && categorieMatch && matiereMatch && prixMatch;
         });
 
         displayProducts(filteredProducts);
@@ -157,6 +156,30 @@ document.addEventListener('DOMContentLoaded', function() {
             displayProducts(); // Afficher tous les produits
         });
     }
+
+    // Importer les catégories
+    // Assurez-vous que <script src="../script/categories-data.js"></script> est inclus dans boutique.html avant ce script !
+
+    // Générer dynamiquement les filtres de catégories APRÈS que le DOM est prêt
+    function renderCategoryFilters() {
+        const typeOptions = document.getElementById('type-options');
+        // Correction : utiliser la variable globale 'categories' directement
+        if (!typeOptions || typeof categories === 'undefined') return;
+        typeOptions.innerHTML = '';
+        categories.forEach(cat => {
+            const label = document.createElement('label');
+            label.className = 'filter-option';
+            label.innerHTML = `
+                <input type="checkbox" name="type" value="${cat.id_categorie}">
+                <span class="checkmark"></span>
+                ${cat.nom}
+            `;
+            typeOptions.appendChild(label);
+        });
+    }
+
+    // Appeler la fonction au chargement
+    renderCategoryFilters();
 
     // Afficher les produits initiaux
     displayProducts();

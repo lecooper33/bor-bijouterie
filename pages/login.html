@@ -51,18 +51,25 @@
         <div class="form-container sign-up">
             <form>
                 <h1>Créer un compte</h1>
-                <input type="text" placeholder="Nom" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" required>
-                <input type="password" placeholder="Confirmer le mot de passe" required>
+                <input type="text" name="nom" placeholder="Nom" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="telephone" placeholder="Numéro de téléphone" required pattern="[0-9]{8,15}">
+                <input type="password" name="password" placeholder="Mot de passe" required>
                 <button type="submit">S'inscrire</button>
+            </form>
+            <!-- Zone OTP -->
+            <form class="otp-form" style="display:none; margin-top: 1em;">
+                <h2>Vérification OTP</h2>
+                <input type="text" name="otp" placeholder="Code OTP reçu par email" required maxlength="6">
+                <button type="submit">Valider le code</button>
+                <div class="otp-message"></div>
             </form>
         </div>
         <div class="form-container sign-in">
             <form>
                 <h1>Se connecter</h1>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Mot de passe" required>
                 <a href="#">Mot de passe oublié ?</a>
                 <button type="submit">Se connecter</button>
             </form>

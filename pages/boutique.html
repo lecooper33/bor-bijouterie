@@ -83,30 +83,11 @@
 
                     <div class="filter-group">
                         <button class="filter-toggle" aria-expanded="false" aria-controls="type-options">
-                            <span>Type</span>
+                            <span>categorie</span>
                             <iconify-icon icon="mdi:chevron-down" class="toggle-icon"></iconify-icon>
                         </button>
                         <div class="filter-options" id="type-options" role="region">
-                            <label class="filter-option">
-                                <input type="checkbox" name="type" value="colliers">
-                                <span class="checkmark"></span>
-                                Colliers
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox" name="type" value="bracelets">
-                                <span class="checkmark"></span>
-                                Bracelets
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox" name="type" value="bagues">
-                                <span class="checkmark"></span>
-                                Bagues
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox" name="type" value="boucles">
-                                <span class="checkmark"></span>
-                                Boucles d'oreilles
-                            </label>
+                            <!-- Les catégories seront injectées ici par JS -->
                         </div>
                     </div>
 
@@ -189,7 +170,12 @@
             </div>
 
             <template id="product-template">
-                <div class="product-card">
+                <div class="product-card" 
+                     data-genre="" 
+                     data-id_categorie="" 
+                     data-matieres="" 
+                     data-prix="" 
+                     data-id_produit="">
                    <a href="produit.html"> <div class="image-container">
                         <img src="" alt="" loading="lazy" />
                         <div class="product-overlay">
@@ -201,19 +187,19 @@
                     </div>
                     </a>
                     <div class="product-info">
-                        <h3></h3>
-                        <p class="category"></p>
+                        <h3 class="nom"></h3>
+                        <p class="categorie"></p>
                         <div class="product-details">
                             <p class="description"></p>
                             <p class="specs">
-                                <span class="material"></span>
+                                <span class="matieres"></span>
                                 <span class="stock-status"></span>
                             </p>
                         </div>
                     </div>
                     <div class="product-footer">
                         <div class="price-info">
-                            <span class="price"></span>
+                            <span class="prix"></span>
                             <span class="stock-qty"></span>
                         </div>
                         <button class="add-to-cart">
@@ -308,7 +294,8 @@
         </div>
     </footer> -->
     <script src="../script/products-data.js"></script>
-    <script src="../script.js"></script>
+    <script src="../script/categories-data.js"></script>
     <script src="../script/boutique.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

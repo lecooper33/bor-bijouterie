@@ -1,57 +1,47 @@
 const products = [
     {
-        id: 1,
-        name: "Collier Élégant",
-        category: "colliers",
+        id_produit: 1,
+        id_categorie: 1, // Remplacer par l'ID réel de la catégorie
+        nom: "Collier Élégant",
         genre: "femme",
-        matiere: "or",
-        price: 10000,
+        matieres: "or",
+        prix: 10000,
         image: "../img/colier4.jpeg",
         description: "Magnifique collier en or 18 carats, design moderne et raffiné",
         stock: 5
     },
     {
-        id: 2,
-        name: "Boucles Élégantes",
-        category: "boucles",
+        id_produit: 2,
+        id_categorie: 2, // Remplacer par l'ID réel de la catégorie
+        nom: "Boucles Élégantes",
         genre: "femme",
-        matiere: "or-rose",
-        price: 10000,
+        matieres: "or-rose",
+        prix: 10000,
         image: "../img/boucles.jpeg",
         description: "Boucles d'oreilles raffinées en or rose, parfaites pour toutes les occasions",
         stock: 8
     },
     {
-        id: 3,
-        name: "Collier Chic",
-        category: "colliers",
+        id_produit: 3,
+        id_categorie: 1, // Remplacer par l'ID réel de la catégorie
+        nom: "Collier Chic",
         genre: "unisexe",
-        matiere: "argent",
-        price: 10000,
+        matieres: "argent",
+        prix: 10000,
         image: "../img/collier5.jpeg",
         description: "Collier moderne en argent 925, design épuré",
         stock: 3
     },
     {
-        id: 4,
-        name: "Collier Modern",
-        category: "colliers",
+        id_produit: 4,
+        id_categorie: 1, // Remplacer par l'ID réel de la catégorie
+        nom: "Collier Modern",
         genre: "femme",
-        matiere: "or",
-        price: 10000,
-        image: "../img/collier2.jpeg",
-        description: "Collier contemporain en or 18 carats, élégance intemporelle",
-        stock: 6
-    },
-    {
-        id: 5,
-        name: "Bague Élégante",
-        category: "bagues",
-        genre: "femme",
-        matiere: "or",
-        price: 10000,
-        image: "../img/bague.jpeg",
-        description: "Bague sophistiquée en or 18 carats, design unique",
-        stock: 4
+        matieres: "or",
+        prix: 10000,
+        image: "../img/colier.jpeg",
+        description: "Collier moderne en or, style tendance",
+        stock: 2
     }
+    // ...autres produits...
 ];
