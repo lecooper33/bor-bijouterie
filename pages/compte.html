@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace Client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/compte.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="account-container">
+        <div class="account-header">
+            <div class="avatar-wrapper">
+                <div class="avatar-circle">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="status-indicator"></div>
+            </div>
+            <h1>Mon Profil</h1>
+            <p class="account-subtitle">Gérez vos informations personnelles</p>
+        </div>
+
+        <div class="account-details">
+            <div id="user-info" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Chargement de vos informations...</p>
+            </div>
+
+            <div class="account-actions">
+                <!-- <button class="action-btn edit-btn">
+                    <i class="fas fa-user-edit"></i> Modifier le profil
+                </button>
+                <button class="action-btn security-btn">
+                    <i class="fas fa-lock"></i> Sécurité
+                </button> -->
+                <button id="logoutBtn" class="action-btn logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+
+        <div class="account-footer">
+            <p>Dernière connexion : <span id="last-login">--/--/----</span></p>
+        </div>
+    </main>
+    <script src="../script/compte.js"></script>
+</body>
+</html>

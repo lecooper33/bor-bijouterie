@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     email: email
                 }));
                 alert("Connexion réussie !");
-                window.location.href = "index.html";
+                window.location.href = "../index.html";
             } else {
                 alert(data.message || "Erreur lors de la connexion.");
             }

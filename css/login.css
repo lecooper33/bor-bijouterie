@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+h1{
+    font-family: 'Playfair Display', serif;
+}
 
 body {
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background-color:  #D4AF37;
+    background: linear-gradient(to right, #e2e2e2,  #F5F5F0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +52,7 @@ body {
 }
 
 .container button {
-    background-color: #512da8;
+    background-color:  #D4AF37;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -147,9 +151,9 @@ body {
 }
 
 .toggle {
-    background-color: #512da8;
+    background-color:  #D4AF37;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right,  #E9D087, #D4AF37);
     color: #fff;
     position: relative;
     left: -100%;
