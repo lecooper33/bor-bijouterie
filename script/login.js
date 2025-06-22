@@ -27,11 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
-                // Connexion réussie, stocker le token et l'id puis rediriger
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('userId', data.id);
+                // Connexion réussie, stocker l'objet user puis rediriger
+                localStorage.setItem('user', JSON.stringify({
+                    id: data.id,
+                    token: data.token,
+                    email: email
+                }));
                 alert("Connexion réussie !");
-                window.location.href = "/index.html"; // Rediriger vers la page d'accueil ou tableau de bord
+                window.location.href = "index.html";
             } else {
                 alert(data.message || "Erreur lors de la connexion.");
             }
@@ -58,9 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok && data.requiresOtpVerification) {
-                // Stocker l'email pour la page OTP
                 localStorage.setItem('pendingEmail', email);
-                localStorage.setItem('userId', data.IdUtilisateur || data.id || "");
+                localStorage.setItem('user', JSON.stringify({
+                    id: data.IdUtilisateur || data.id || "",
+                    email: email
+                }));
                 alert("Inscription réussie. Vérifiez votre e-mail pour le code OTP.");
                 window.location.href = "otp.html";
             } else {
