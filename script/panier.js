@@ -151,20 +151,23 @@ function proceedToCheckout() {
         window.location.href = 'login.html';
         return;
     }
-    // Préparer les données pour l'API (clé quantité avec accent !)
+    // Préparer les données pour l'API
     const produits = cart.map(item => ({
         id_produit: item.id_produit || item.id,
         quantité: item.quantity, // clé correcte pour l'API
         prix_unitaire: item.price
     }));
+
     // Données complètes de la commande
     const commandeData = {
         id_client: user.id,
-        mode_paiement: 'Espèces', // Correction : valeur attendue par l'API
-        adresse_livraison: user.adresse || 'port_gentil',
+        mode_paiement: 'especes', // ou 'Carte' ou 'Mobile Money' selon le choix utilisateur
+        adresse_livraison: user.adresse ? user.adresse : 'port_gentil',
         produits: produits
     };
+
     console.log('Données envoyées au serveur:', commandeData);
+
     fetch('http://localhost:4000/commandes', {
         method: 'POST',
         headers: {
@@ -174,11 +177,20 @@ function proceedToCheckout() {
         body: JSON.stringify(commandeData)
     })
     .then(async response => {
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || `Erreur HTTP: ${response.status}`);
+        console.log('Réponse brute API:', response);
+        let data;
+        try {
+            data = await response.json();
+        } catch (e) {
+            console.error('Erreur lors du parsing JSON de la réponse:', e);
+            throw new Error('Réponse API non valide');
         }
-        return response.json();
+        console.log('Données reçues de l\'API:', data);
+
+        if (!response.ok) {
+            throw new Error(data.message || `Erreur HTTP: ${response.status}`);
+        }
+        return data;
     })
     .then(data => {
         if (data.id_commande) {
@@ -192,11 +204,6 @@ function proceedToCheckout() {
     .catch(error => {
         console.error('Erreur:', error);
         alert(`Erreur lors de la commande: ${error.message}`);
-        if (error.response) {
-            error.response.json().then(errData => {
-                console.error('Détails de l\'erreur:', errData);
-            });
-        }
     });
 }
 
