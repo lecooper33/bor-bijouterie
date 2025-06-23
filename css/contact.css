@@ -127,7 +127,7 @@ body {
     left: 0;
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #3498db, #2ecc71);
+    background: linear-gradient(90deg,#E9D087, #F5F5F0);
 }
 
 .contact-form-block {
@@ -184,7 +184,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #3498db, #2ecc71);
+    background: linear-gradient(90deg, #E9D087, #F5F5F0);
     transition: all 0.3s;
 }
 
@@ -194,7 +194,7 @@ body {
 }
 
 .btn-send {
-    background: linear-gradient(90deg, #3498db, #2ecc71);
+    background: linear-gradient(90deg, #D4AF37, #E9D087);
     color: white;
     border: none;
     padding: 12px 30px;
@@ -275,17 +275,51 @@ body {
     transition: all 0.3s;
 }
 
-.social-icons a:hover {
+ /* a:hover {
     background: linear-gradient(90deg, #3498db, #2ecc71);
     transform: translateY(-3px);
-}
+} */
 
 .contact-map {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-
+.instagram-icon:hover {
+    background: linear-gradient(
+    45deg,
+    #833AB4,  /* violet */
+    #C13584,  /* rose */
+    #E1306C,  /* rouge */
+    #F77737,  /* orange */
+    #FCAF45,  /* jaune */
+    #FFDC80   /* clair */
+  );
+}
+.twitter-icon:hover {
+    background: linear-gradient(
+    45deg,
+    #1DA1F2,  /* bleu clair */
+    #1B95E0,  /* bleu */
+    #1A91DA   /* bleu foncé */
+  );
+}
+.linkedin-icon:hover {
+    background: linear-gradient(
+    45deg,
+    #0077B5,  /* bleu foncé */
+    #00A0DC,  /* bleu clair */
+    #00B0F0   /* bleu très clair */
+  );
+}
+.facebook-icon:hover {
+    background: linear-gradient(
+    45deg,
+    #3b5998,  /* bleu foncé */
+    #4c69ba,  /* bleu */
+    #5b7bd5   /* bleu clair */
+  );
+}
 @media (max-width: 768px) {
     .contact-container {
         grid-template-columns: 1fr;
