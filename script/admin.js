@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Modal overlay click
     modalOverlay.addEventListener('click', closeAllModals);
-    
     // Navigation function
     function navigateToSection(section) {
         currentSection = section;
@@ -101,50 +100,90 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize dashboard with charts
     function initDashboard() {
-        // Orders chart
-        const ordersCtx = document.getElementById('orders-chart').getContext('2d');
-        new Chart(ordersCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Commandes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: 'rgba(79, 70, 229, 0.7)',
-                    borderColor: 'rgba(79, 70, 229, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
+        // Récupérer les commandes et produits en parallèle
+        Promise.all([
+            fetch(`${API_BASE_URL}commandes`).then(res => res.json()),
+            fetch(`${API_BASE_URL}produits`).then(res => res.json())
+        ]).then(([commandes, produits]) => {
+            // --- Commandes par mois ---
+            const commandesParMois = Array(12).fill(0);
+            commandes.forEach(cmd => {
+                const date = new Date(cmd.date_creation);
+                const mois = date.getMonth(); // 0 = Janvier
+                commandesParMois[mois]++;
+            });
+            const moisLabels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+
+            const ordersCtx = document.getElementById('orders-chart').getContext('2d');
+            new Chart(ordersCtx, {
+                type: 'bar',
+                data: {
+                    labels: moisLabels,
+                    datasets: [{
+                        label: 'Commandes',
+                        data: commandesParMois,
+                        backgroundColor: 'rgba(79, 70, 229, 0.7)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
                     }
                 }
+            });
+
+            // --- Produits vendus ---
+            // On suppose que chaque commande a un champ details_produits ou produits_vendus
+            // Sinon, il faut une API pour les détails de commande, ou alors tu dois adapter ici
+            // On va compter le nombre total vendu par produit à partir des commandes
+            const ventesParProduit = {};
+            commandes.forEach(cmd => {
+                if (cmd.details_produits && Array.isArray(cmd.details_produits)) {
+                    cmd.details_produits.forEach(prod => {
+                        ventesParProduit[prod.nom_produit] = (ventesParProduit[prod.nom_produit] || 0) + prod.quantite;
+                    });
+                }
+            });
+
+            // Si tu n'as pas details_produits dans chaque commande, il faut faire une requête supplémentaire pour chaque commande pour récupérer les détails
+
+            // On prépare les labels et data pour le graphique
+            const produitsLabels = Object.keys(ventesParProduit);
+            const produitsData = Object.values(ventesParProduit);
+
+            // Si pas de ventes, on affiche les produits du catalogue avec 0
+            if (produitsLabels.length === 0) {
+                produits.forEach(prod => {
+                    produitsLabels.push(prod.nom);
+                    produitsData.push(0);
+                });
             }
-        });
-        
-        // Products chart
-        const productsCtx = document.getElementById('products-chart').getContext('2d');
-        new Chart(productsCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['T-shirts', 'Pantalons', 'Chaussures', 'Accessoires'],
-                datasets: [{
-                    data: [300, 150, 100, 50],
-                    backgroundColor: [
-                        'rgba(79, 70, 229, 0.7)',
-                        'rgba(16, 185, 129, 0.7)',
-                        'rgba(245, 158, 11, 0.7)',
-                        'rgba(59, 130, 246, 0.7)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true
-            }
+
+            const productsCtx = document.getElementById('products-chart').getContext('2d');
+            new Chart(productsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: produitsLabels,
+                    datasets: [{
+                        data: produitsData,
+                        backgroundColor: [
+                            'rgba(79, 70, 229, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(231, 76, 60, 0.7)',
+                            'rgba(52, 152, 219, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
         });
     }
     

@@ -106,12 +106,25 @@
 }
 
 .payment-method-choice input[type="radio"]:checked + label {
-    border-color: #D4AF37;
+    border-color: #f53636;
     background: #fff;
 }
 
 .payment-method-choice input[type="radio"]:checked + label iconify-icon {
-    color: #D4AF37;
+    color: #d43737;
+}
+
+.payment-method-choice.selected-method,
+.payment-method-choice.selected-method label {
+    background: #fff7f0;
+    border: 2px solid #EC6608;
+    color: #EC6608;
+    border-radius: 8px;
+    transition: border 0.2s, color 0.2s, background 0.2s;
+}
+
+.payment-method-choice.selected-method iconify-icon {
+    color: #EC6608 !important;
 }
 
 .payment-method-form {

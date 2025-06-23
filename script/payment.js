@@ -303,4 +303,18 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (forms.card) { // Fallback to card payment form if no radio button is checked
         forms.card.style.display = 'block';
     }
+
+    const methodChoices = document.querySelectorAll('.payment-method-choice input[type="radio"]');
+    methodChoices.forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.payment-method-choice').forEach(div => {
+                div.classList.remove('selected-method');
+            });
+            this.closest('.payment-method-choice').classList.add('selected-method');
+        });
+        // Sélection initiale
+        if (input.checked) {
+            input.closest('.payment-method-choice').classList.add('selected-method');
+        }
+    });
 });
