@@ -262,8 +262,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="client-image">Image (URL)</label>
-                    <input type="text" id="client-image">
+                    <label for="client-image">Image</label>
+                    <div class="image-upload-area" id="client-image-upload">
+                        <p>Glissez-déposez une image ici ou cliquez pour sélectionner</p>
+                        <input type="file" id="client-image-file" accept="image/*" style="display:none;">
+                        <img id="client-image-preview" src="" alt="" style="max-width:100px;display:none;">
+                        <input type="hidden" id="client-image">
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-secondary close-modal">Annuler</button>
@@ -375,8 +380,13 @@
                     <input type="number" id="produit-stock" required>
                 </div>
                 <div class="form-group">
-                    <label for="produit-image">Image (URL)</label>
-                    <input type="text" id="produit-image">
+                    <label for="produit-image">Image</label>
+                    <div class="image-upload-area" id="produit-image-upload">
+                        <p>Glissez-déposez une image ici ou cliquez pour sélectionner</p>
+                        <input type="file" id="produit-image-file" accept="image/*" style="display:none;">
+                        <img id="produit-image-preview" src="" alt="" style="max-width:100px;display:none;">
+                        <input type="hidden" id="produit-image">
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-secondary close-modal">Annuler</button>
@@ -400,8 +410,13 @@
                     <input type="text" id="categorie-nom" required>
                 </div>
                 <div class="form-group">
-                    <label for="categorie-image">Image (URL)</label>
-                    <input type="text" id="categorie-image">
+                    <label for="categorie-image">Image</label>
+                    <div class="image-upload-area" id="categorie-image-upload">
+                        <p>Glissez-déposez une image ici ou cliquez pour sélectionner</p>
+                        <input type="file" id="categorie-image-file" accept="image/*" style="display:none;">
+                        <img id="categorie-image-preview" src="" alt="" style="max-width:100px;display:none;">
+                        <input type="hidden" id="categorie-image">
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-secondary close-modal">Annuler</button>
@@ -427,7 +442,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
     <script src="../script/admin.js"></script>
 </body>
 </html>

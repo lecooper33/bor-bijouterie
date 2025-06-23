@@ -813,3 +813,65 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with dashboard
     navigateToSection('dashboard');
 });
+
+function setupImageUpload(areaId, fileInputId, previewId, hiddenInputId) {
+    const area = document.getElementById(areaId);
+    const fileInput = document.getElementById(fileInputId);
+    const preview = document.getElementById(previewId);
+    const hiddenInput = document.getElementById(hiddenInputId);
+
+    area.addEventListener('click', () => fileInput.click());
+
+    area.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        area.style.borderColor = '#333';
+    });
+    area.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        area.style.borderColor = '#aaa';
+    });
+    area.addEventListener('drop', (e) => {
+        e.preventDefault();
+        area.style.borderColor = '#aaa';
+        const file = e.dataTransfer.files[0];
+        handleImageFile(file, preview, hiddenInput);
+    });
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        handleImageFile(file, preview, hiddenInput);
+    });
+}
+
+function handleImageFile(file, preview, hiddenInput) {
+    if (!file) return;
+    // Preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+
+    // Upload to Cloudinary
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'bior-bijouterie');
+    fetch('https://api.cloudinary.com/v1_1/dwhqa7huy/image/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        hiddenInput.value = data.secure_url;
+    })
+    .catch(() => {
+        alert("Erreur lors de l'upload de l'image.");
+    });
+}
+
+// Initialisation pour chaque modal
+document.addEventListener('DOMContentLoaded', function() {
+    setupImageUpload('produit-image-upload', 'produit-image-file', 'produit-image-preview', 'produit-image');
+    setupImageUpload('client-image-upload', 'client-image-file', 'client-image-preview', 'client-image');
+    setupImageUpload('categorie-image-upload', 'categorie-image-file', 'categorie-image-preview', 'categorie-image');
+});

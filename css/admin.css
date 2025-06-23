@@ -686,6 +686,15 @@ tr:hover {
     font-size: 0.875rem;
 }
 
+/* Image Upload Area */
+.image-upload-area {
+    border: 2px dashed #aaa;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 /* Responsive Breakpoints */
 @media (min-width: 640px) {
     .stats-container {
