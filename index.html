@@ -66,43 +66,42 @@
                 <!-- Les produits seront injectés ici par JavaScript -->
             </div>
             <div class="voir-boutique-container" style="text-align:center; margin-top: 2em;">
-                <a href="pages/boutique.html" class="voir-boutique-btn" style="display:inline-block;padding:12px 32px;background:#D4AF37;color:#fff;font-weight:bold;border-radius:30px;text-decoration:none;font-size:1.1em;transition:background 0.2s;">Voir la boutique</a>
+                <a href="pages/produit.html" class="voir-boutique-btn" style="display:inline-block;padding:12px 32px;background:#D4AF37;color:#fff;font-weight:bold;border-radius:30px;text-decoration:none;font-size:1.1em;transition:background 0.2s;">Voir la boutique</a>
             </div>
 
             <template id="product-template">
-                <div class="product-card">
-                    <div class="image-container">
-                        <img src="" alt="" loading="lazy" />
-                        <div class="product-overlay">
-                            <button class="quick-view">
-                                <iconify-icon icon="mdi:eye" width="20" height="20"></iconify-icon>
-                                Voir détails
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="nom"></h3>
-                        <p class="categorie"></p>
-                        <div class="product-details">
-                            <p class="description"></p>
-                            <p class="specs">
-                                <span class="matieres"></span>
-                                <span class="stock-status"></span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="product-footer">
-                        <div class="price-info">
-                            <span class="prix"></span>
-                            <span class="stock-qty"></span>
-                        </div>
-                        <button class="add-to-cart">
-                            <iconify-icon icon="mdi:cart-plus" width="20" height="20"></iconify-icon>
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </template>
+    <div class="product-card">
+        <div class="image-container">
+            <img src="" alt="" loading="lazy" />
+            <div class="product-overlay">
+                <button class="quick-view">
+                    <iconify-icon icon="mdi:eye" width="20" height="20"></iconify-icon>
+                    Voir détails
+                </button>
+            </div>
+        </div>
+        <div class="product-info">
+            <h3 class="nom"></h3>
+            <p class="categorie"></p>
+            <div class="product-details">
+                <p class="description"></p>
+                <p class="specs">
+                    <span class="matieres"></span>
+                    <span class="stock-status"></span>
+                </p>
+            </div>
+        </div>
+        <div class="product-footer">
+            <div class="price-info">
+                <span class="prix"></span>
+                <span class="stock-qty"></span>
+            </div>
+            <button class="add-to-cart">
+                <iconify-icon icon="mdi:cart-plus" width="20" height="20"></iconify-icon>
+            </button>
+        </div>
+    </div>
+</template>
         </section>
     </section>
     <!-- section a propos -->
@@ -174,8 +173,8 @@
   </div>
 </footer>
 
-    <script src="script/products-data.js"></script>
-    <script src="script.js"></script>
     <script src="script/home.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>

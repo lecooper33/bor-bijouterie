@@ -312,4 +312,30 @@ document.addEventListener('DOMContentLoaded', async function() {
         filtersOverlay.classList.toggle('active');
         document.body.style.overflow = filtersSection.classList.contains('active') ? 'hidden' : '';
     }
+
+    const typeOptions = document.getElementById('type-options');
+    if (!typeOptions) return;
+
+    try {
+        const response = await fetch('http://localhost:4000/categories');
+        if (!response.ok) throw new Error('Erreur lors du chargement des catégories');
+        const categories = await response.json();
+
+        // Nettoie d'abord le conteneur
+        typeOptions.innerHTML = '';
+
+        categories.forEach(cat => {
+            const label = document.createElement('label');
+            label.className = 'filter-option';
+            label.innerHTML = `
+                <input type="checkbox" name="categorie" value="${cat.id_categorie}">
+                <span class="checkmark"></span>
+                ${cat.nom}
+            `;
+            typeOptions.appendChild(label);
+        });
+    } catch (error) {
+        typeOptions.innerHTML = '<p>Impossible de charger les catégories.</p>';
+        console.error(error);
+    }
 });
