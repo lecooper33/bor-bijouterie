@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage('Session expirée, veuillez recommencer l\'inscription.', 'error');
             return;
         }
-        
-        if (code.length !== 6 || !/^\d+$/.test(code)) {
-            showMessage('Veuillez entrer un code OTP valide à 6 chiffres', 'error');
+
+        if (code.length !== 4 || !/^\d+$/.test(code)) {
+            showMessage('Veuillez entrer un code OTP valide à 4 chiffres', 'error');
             return;
         }
         
