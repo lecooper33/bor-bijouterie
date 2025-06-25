@@ -27,7 +27,7 @@
             <div class="sidebar-footer">
                 <div class="user-profile">
                     <div class="avatar">A</div>
-                    <span>Administrateur</span>
+                    <span id="admin-name"></span>
                 </div>
                 <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
             </div>
@@ -455,5 +455,69 @@
         window.location.href = 'adminRegister.html';
       });
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Affiche le nom de l'admin si stocké
+    if(localStorage.getItem('adminNom')) {
+        document.getElementById('admin-name').textContent = localStorage.getItem('adminNom');
+    }
+
+    // Ouvre le modal "Mon compte"
+    document.getElementById('edit-account-btn').addEventListener('click', function() {
+        document.getElementById('admin-nom-edit').value = localStorage.getItem('adminNom') || '';
+        document.getElementById('admin-email-edit').value = localStorage.getItem('adminEmail') || '';
+        document.getElementById('admin-telephone-edit').value = localStorage.getItem('adminTelephone') || '';
+        document.getElementById('admin-password-edit').value = '';
+        document.getElementById('admin-account-modal').style.display = 'block';
+        document.getElementById('modal-overlay').style.display = 'block';
+    });
+
+    // Ferme le modal
+    document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const modalId = btn.getAttribute('data-close');
+            if(modalId) document.getElementById(modalId).style.display = 'none';
+            document.getElementById('modal-overlay').style.display = 'none';
+        });
+    });
+
+    // Soumission du formulaire de modification
+    document.getElementById('admin-account-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const nom = document.getElementById('admin-nom-edit').value;
+        const email = document.getElementById('admin-email-edit').value;
+        const telephone = document.getElementById('admin-telephone-edit').value;
+        const password = document.getElementById('admin-password-edit').value;
+
+        const id_admin = localStorage.getItem('adminId');
+        if (!id_admin) {
+            alert("Impossible de trouver l'ID admin.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/administrateur/${id_admin}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nom, email, telephone, password })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                alert('Compte mis à jour !');
+                localStorage.setItem('adminNom', nom);
+                localStorage.setItem('adminEmail', email);
+                localStorage.setItem('adminTelephone', telephone);
+                document.getElementById('admin-name').textContent = nom;
+                document.getElementById('admin-account-modal').style.display = 'none';
+                document.getElementById('modal-overlay').style.display = 'none';
+            } else {
+                alert(data.error || "Erreur lors de la mise à jour");
+            }
+        } catch (err) {
+            alert("Erreur serveur");
+        }
+    });
+});
+</script>
 </body>
 </html>

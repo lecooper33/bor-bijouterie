@@ -875,3 +875,28 @@ document.addEventListener('DOMContentLoaded', function() {
     setupImageUpload('client-image-upload', 'client-image-file', 'client-image-preview', 'client-image');
     setupImageUpload('categorie-image-upload', 'categorie-image-file', 'categorie-image-preview', 'categorie-image');
 });
+
+// Affichage du nom de l'administrateur connecté
+document.addEventListener('DOMContentLoaded', function() {
+    const adminData = localStorage.getItem('admin');
+    if (adminData) {
+        const admin = JSON.parse(adminData);
+        if (admin.id_admin) {
+            fetch(`http://localhost:4000/administrateur/${admin.id_admin}`)
+                .then(res => res.json())
+                .then(data => {
+                    const adminNameElement = document.getElementById('admin-name');
+                    if (adminNameElement && data.nom) {
+                        adminNameElement.textContent = data.nom;
+                    }
+                })
+                .catch(() => {
+                    // En cas d'erreur, on peut afficher le nom du localStorage
+                    const adminNameElement = document.getElementById('admin-name');
+                    if (adminNameElement && admin.nom) {
+                        adminNameElement.textContent = admin.nom;
+                    }
+                });
+        }
+    }
+});

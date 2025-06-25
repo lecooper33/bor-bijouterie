@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ email, password })
             });
+           
 
             const data = await response.json();
 
@@ -59,14 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             showMessage(data.message);
-            console.log('Connexion réussie, token:', data.token);
-            
-            // Stocker le token dans le localStorage
+            console.log('Connexion réussie, token:', data.token, 'userId:', data.userId);
+
+            // Stocker le token et l'id admin dans le localStorage
             localStorage.setItem('adminToken', data.token);
-            
+            localStorage.setItem('adminId', data.userId);
+            // On ne connait pas le nom ici, donc on stocke juste l'id
+            localStorage.setItem('admin', JSON.stringify({ id_admin: data.userId }));
+
+            console.log('Token et adminId stockés dans le localStorage:', data.token, data.userId);
+
             // Redirection vers le tableau de bord après 2 secondes
             setTimeout(() => {
-                window.location.href = '../pages/admin.html'; // Remplacez par votre page de dashboard
+                window.location.href = '../pages/admin.html';
             }, 2000);
 
         } catch (error) {
