@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Stocker le token dans le localStorage
             localStorage.setItem('adminToken', data.token);
-            localStorage.setItem('adminId', data.userId);
             
             // Redirection vers le tableau de bord après 2 secondes
             setTimeout(() => {

@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
-                // Connexion réussie, stocker l'objet user puis rediriger
+                // Connexion client réussie
                 localStorage.setItem('user', JSON.stringify({
                     id: data.id,
                     token: data.token,
@@ -37,7 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Connexion réussie !");
                 window.location.href = "../index.html";
             } else {
-                alert(data.message || "Erreur lors de la connexion.");
+                // Si la connexion client échoue, tenter la connexion admin
+                const adminResponse = await fetch('http://localhost:4000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const adminData = await adminResponse.json();
+                if (adminResponse.ok) {
+                    // Connexion admin réussie
+                    localStorage.setItem('adminToken', adminData.token);
+                    alert("Connexion admin réussie !");
+                    window.location.href = "admin.html";
+                } else {
+                    alert(data.message || adminData.message || "Erreur lors de la connexion.");
+                }
             }
         } catch (error) {
             alert("Erreur réseau ou serveur.");

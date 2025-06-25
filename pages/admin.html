@@ -444,5 +444,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../script.js"></script>
     <script src="../script/admin.js"></script>
+    <script>
+      // Redirige vers la page de login admin si pas authentifié
+      if (!localStorage.getItem('adminToken')) {
+        window.location.href = 'adminRegister.html';
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', function() {
+        localStorage.removeItem('adminToken');
+        window.location.href = 'adminRegister.html';
+      });
+    </script>
 </body>
 </html>
